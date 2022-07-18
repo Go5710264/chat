@@ -2,7 +2,6 @@ const chatWidget = document.querySelector('.chat-widget'); // доступ к в
 const chatWidgetInput = document.getElementById('chat-widget__input'); // доступ к полю с сообщением
 const chatMessages = document.querySelector('.chat-widget__messages'); // доступ к контейнеру в который пушатся сообщения
 const chat = document.querySelector('.chat-widget__messages-container'); // доступ к окну чата со скроллом
-//const arrMessages = document.querySelectorAll('.message'); // массив с сообщениями
 let arrLength = 0; // количество сообщений
 
 chatWidget.addEventListener('click', () => { // обработка клика на виджет
@@ -12,6 +11,12 @@ chatWidget.addEventListener('click', () => { // обработка клика н
 }); 
 
 chatWidgetInput.addEventListener('change', () => { // обработка события ввода сообщения 
+    
+    chatWidgetInput.value = chatWidgetInput.value.trim(); // убрать лишние пробелы 
+    if(chatWidgetInput.value.charAt(0) === '') { // если значение строки без символов
+        return false; // выйти из функции
+    }
+
     chatMessages.innerHTML += `
         <div class="message message_client">
             <div class="message__time">${currentDate()}</div>
@@ -25,6 +30,7 @@ chatWidgetInput.addEventListener('change', () => { // обработка соб�
         </div>
     `;
     arrLength = arrLength + 2;
+    chatWidgetInput.value = ''; // очищение строки с сообщением
     chat.scrollTop = chat.scrollHeight; // автоматическая прокрутка окна чата
 })
 
@@ -40,7 +46,7 @@ setTimeout(() => { // интервал по автоматической зад�
         `;
         arrLength++; // увеличить переменную на 1
     }
-}, 5000); // повторять каждые 30 секунд
+}, 30000); // повторять каждые 30 секунд
 
 getMessage = () => { // генерация сообщения бота
     const arrayRobotMessages = [ // массив из фраз бота
@@ -58,4 +64,11 @@ getMessage = () => { // генерация сообщения бота
 currentDate = () => { // генерация времени сообщения
     let date = new Date; // доступ к массиву с датой
     return `${date.getHours()}:${date.getMinutes()}`; // вернуть часы и минуты
+}
+
+validate = () => {
+    txt = '';
+    if(!chatWidgetInput.value.checkValidity()){
+        txt = 'Необходимо написать символы'
+    }
 }
