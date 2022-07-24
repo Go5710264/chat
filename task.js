@@ -2,7 +2,7 @@ const chatWidget = document.querySelector('.chat-widget'); // доступ к в
 const chatWidgetInput = document.getElementById('chat-widget__input'); // доступ к полю с сообщением
 const chatMessages = document.querySelector('.chat-widget__messages'); // доступ к контейнеру в который пушатся сообщения
 const chat = document.querySelector('.chat-widget__messages-container'); // доступ к окну чата со скроллом
-let arrLength = 0; // количество сообщений
+let arrLength = 0; // количество сообщений.
 
 chatWidget.addEventListener('click', () => { // обработка клика на виджет
     if (!chatWidget.classList.contains('chat-widget_active')) { // если у виджета нет класса chat-widget_active
